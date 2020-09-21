@@ -13,55 +13,168 @@ var rdbOthers= document.getElementById("rdOthers");
 var btnSave= document.getElementById("btnSave");
 var divRadio= document.getElementById("divRadio");
 
-btnSave.addEventListener("click" , displayData,false);
+onFirstPageLoad();
 
-function displayData()
+function onFirstPageLoad()
+{
+  fillCountry();
+  btnSave.addEventListener("click" , validateData,false);
+}
+
+function fillCountry()
 {
   
-  console.log("checkvalid");
+}
+
+function fillState()
+{
+
+}
+
+function fillCity()
+{
+
+}
+
+function validateData()
+{
+  let isValid=true;
+  debugger;
   // check all validation
   if(txtFirstName.value.trim()==="")
   {
     txtFirstName.classList.add("txtErrorClass");    
+    isValid=false;
   }
+  else
+  {
+    txtFirstName.classList.remove("txtErrorClass");
+  }
+
   if(txtLastName.value.trim()==="" )
   {
     txtLastName.classList.add("txtErrorClass");
+    isValid=false;
   }
-  if(txtMobileNo.value.trim()==="" || txtMobileNo.value.trim()==="0")
+  else
   {
-    txtMobileNo.classList.add("txtErrorClass");
+    txtLastName.classList.remove("txtErrorClass");
   }
-  if(txtEmailId.value.trim()==="")
-  {
-    txtEmailId.classList.add("txtErrorClass");
-  }
-  if(rdbFemale.checked=="false" && rdbMale.checked=="false" && rdbOthers.checked=="false")
+
+  if(rdbFemale.checked===false && rdbMale.checked===false && rdbOthers.checked===false)
   {
     divRadio.classList.add("rdbErrorClass");
+    isValid=false;
   }
+  else
+  {
+    divRadio.classList.remove("rdbErrorClass");
+  }
+  debugger;
+
+  // mobile validation
+  if(validateMobileNo()===false)
+  {
+    txtMobileNo.classList.add("txtErrorClass");
+    isValid=false;
+  }  
+  else
+  {
+    //alert(validateMobileNo());
+    txtMobileNo.classList.remove("txtErrorClass");
+    
+  } 
+  
+  // email id validation
+  if( validateEmailId()===false)
+  {
+    txtEmailId.classList.add("txtErrorClass");    
+    isValid=false;
+  }
+  else
+  {   
+    txtEmailId.classList.remove("txtErrorClass");
+  }
+
+ 
+
   if(txtAddress.value.trim()==="")
   {
     txtAddress.classList.add("txtErrorClass");
+    isValid=false;
   }
-  if(ddlCountry.value==="Select Country")
+  else
   {
-    ddlCountry.classList.add("ddlErrorClass");
+    txtAddress.classList.remove("txtErrorClass");
   }
-  if(ddlCountry.value!=="Select Country" && ddlState.value==="Select State")
-  {
-    ddlState.classList.add("ddlErrorClass");
-  }
-  if(ddlCountry.value!=="Select Country" && ddlState.value!=="Select State" && ddlCity.value==="Select City")
-  {
-    ddlCity.classList.add("ddlErrorClass");
-  }
-  if(chkAgree.checked=="false")
+  // if(ddlCountry.value==="Select Country")
+  // {
+  //   ddlCountry.classList.add("ddlErrorClass");
+  //   isValid=false;
+  // }
+  // else
+  // {
+  //   ddlCountry.classList.remove("ddlErrorClass");
+  // }
+  // if(ddlCountry.value!=="Select Country" && ddlState.value==="Select State")
+  // {
+  //   ddlState.classList.add("ddlErrorClass");
+  //   isValid=false;
+  // }
+  // else{
+  //   ddlState.classList.remove("ddlErrorClass");
+  // }
+  // if(ddlCountry.value!=="Select Country" && ddlState.value!=="Select State" && ddlCity.value==="Select City")
+  // {
+  //   ddlCity.classList.add("ddlErrorClass");
+  //   isValid=false;
+  // }
+  // else
+  // {
+  //   ddlCity.classList.remove("ddlErrorClass");
+  // }
+  if(chkAgree.checked===false)
   {
     chkAgree.classList.add("chkErrorClass");
+    isValid=false;
+  }
+  else
+  {
+    chkAgree.classList.remove("chkErrorClass");
+  } 
+    
+  if(isValid)
+  {
+    showTabelData();   
   }
   
+}
 
-
+function validateMobileNo()
+{
   
+  debugger;
+  let phoneno = /^\d{10}$/;  
+  if(txtMobileNo.value.trim()==="" || txtMobileNo.value.trim()==="0" || !(txtMobileNo.value.match(phoneno)))
+  {   
+    return false;
+  }
+  return true;
+}
+
+function validateEmailId()
+{
+  debugger;
+  var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+  if (txtEmailId.value.trim()==="" || reg.test(txtEmailId.value) === false) 
+  {    
+      return false;
+  } 
+  return true;       
+}
+
+function showTabelData()
+{
+  debugger;
+alert("hi");
 }

@@ -1,4 +1,5 @@
 .txtErrorClass { border:  1px solid red; }
 .chkErrorClass { border:  1px solid red; }
 .ddlErrorClass { border:  1px solid red; }
-.rdbErrorClass{border:2px solid red};
+.rdbErrorClass{border:1px solid red; margin-bottom: 17px;}
+
